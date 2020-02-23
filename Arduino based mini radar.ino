@@ -8,16 +8,15 @@ int Ymax = 128;
 int Xmax = 160;
 int base = 8;
 int pos = base+6;
-//int deg=0;
-String deg;
+String deg;           // servo position in degrees (maybe)
 int x;
-int val =200;
-int j = 2;
+int val = 200;
+//int j = 2;
+int minDistance = 30;    // minimum distance to trigger red
 Servo myServo; 
 
-long duration;
-int distance;
-int servoPos;
+int distance;          // detected distance by sensor
+int servoPos;           // calculated servo position
 
 
 Ucglib_ST7735_18x128x160_HWSPI ucg(/*cd=*/ 9, /*cs=*/ 10, /*reset=*/ 8);
@@ -38,6 +37,7 @@ void setup(void)
   myServo.attach(3); // Defines on which pin is the servo motor attached
 }
 
+// loop through all degrees
 void loop(void)
 {
   fix(); 
@@ -45,117 +45,13 @@ void loop(void)
   for ( x=80; x >= 10; x--)
   {  
     drawLine(x+6, x+5);
-//    distance = calculateDistance();
-//    Serial.println(distance); 
-//    
-//    servoPos = map(x, 80, 10, 15,165); 
-//    myServo.write(servoPos);
-//
-//    // Mark red if object found
-//    if (distance < 30)
-//    {
-//      int f = x+6;
-//      ucg.setColor(255, 0, 0);
-//      ucg.drawLine(Xmax/2, pos, -val*cos(radians(f*2)),val*sin(radians(f*2)));
-//    }
-//    ucg.setColor(0, 207, 0);
-//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
-//    
-//    int e = x+5;
-//    ucg.setColor(0, 0, 0);
-//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(e*2)),200*sin(radians(e*2)));
-//    ucg.setColor(255, 0, 0);
-//    ucg.setPrintPos(160,0);
-//    ucg.setPrintDir(2);
-//    ucg.print("Deg :"); 
-//    //deg = map (x, 10, 80 , 0, 180); 
-//    if(servoPos < 100) 
-//    {
-//      deg = "0" + String(servoPos);
-//    }
-//    else
-//    {
-//      deg = String(servoPos);
-//    }
-//    
-//    ucg.setPrintPos(120,0);
-//    ucg.setPrintDir(2);
-//    ucg.print(deg);
-//    ucg.setPrintPos(10,0);
-//    ucg.print(distance); 
-//    ucg.setColor(0, 0, 255);
-//    ucg.setPrintPos(90,38);
-//    ucg.setPrintDir(2);
-//    ucg.print("0.25");
-//    ucg.setPrintPos(90,70);
-//    ucg.print("0.50");
-//    ucg.setPrintPos(90,110);
-//    ucg.print("1.00");
   }
-  
-  
-  // ucg.clearScreen();
   fix();
-  
-  
+    
   for ( x=10; x <= 80; x++)
   {  
     drawLine(x-5, x-4);
-//    distance = calculateDistance();
-//    Serial.println(distance); 
-//    servoPos = map(x, 10, 80, 165,15); 
-//    myServo.write(servoPos);
-//
-//    // Mark red if object found
-//    if (distance < 10)
-//    {
-//      int e = x-5;
-//      ucg.setColor(255, 0, 0);
-//      ucg.drawLine(Xmax/2, pos, -val*cos(radians(e*2)),val*sin(radians(e*2)));
-//    }
-//    
-//    
-//    ucg.setColor(0, 207, 0);
-//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
-//
-//    
-//    int d = x-4;
-//    ucg.setColor(0, 0, 0);
-//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(d*2)),200*sin(radians(d*2)));
-//    ucg.setColor(255, 0, 0);
-//    ucg.setPrintPos(160,0);
-//    ucg.setPrintDir(2);
-//    ucg.print("Deg :"); 
-//    //deg = map (x, 10, 80 , 0, 180); 
-//    if(servoPos < 100) 
-//    {
-//      deg = "0" + String(servoPos);
-//    }
-//    else
-//    {
-//      deg = String(servoPos);
-//    }
-//    ucg.setPrintPos(120,0);
-//    ucg.setPrintDir(2);
-//    ucg.print(deg); 
-//
-//
-//    ucg.setPrintPos(10,0);
-//    ucg.print(distance); 
-//    
-//    
-//    ucg.setColor(0, 0, 255);
-//    ucg.setPrintPos(90,38);
-//    ucg.setPrintDir(2);
-//    ucg.print("0.25");
-//    ucg.setPrintPos(90,70);
-//    ucg.print("0.50");
-//    ucg.setPrintPos(90,110);
-//    ucg.print("1.00");
-    
   }
-  //ucg.clearScreen();
-  
 }
 
 void drawLine(int foundOffset, int emptyOffset){
@@ -166,9 +62,8 @@ void drawLine(int foundOffset, int emptyOffset){
   myServo.write(servoPos);
   
   // Mark red if object found
-  if (distance < 30)
+  if (distance < minDistance)
   {
-    //int f = x+6;
     ucg.setColor(255, 0, 0);
     ucg.drawLine(Xmax/2, pos, -val*cos(radians(foundOffset*2)),val*sin(radians(foundOffset*2)));
   }
@@ -212,6 +107,7 @@ void drawLine(int foundOffset, int emptyOffset){
   ucg.print("0.50");
   ucg.setPrintPos(90,110);
   ucg.print("1.00");
+
 }
   
 void fix(){
@@ -250,7 +146,7 @@ int calculateDistance()
   digitalWrite(trigPin, HIGH); 
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
+  long duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
   distance= duration*0.034/2;
   return distance;
 }
