@@ -48,6 +48,8 @@ void loop(void)
     
     k = map(x, 80, 10, 15,165); 
     myServo.write(k);
+
+    // Mark red if object found
     if (distance < 30)
     {
       int f = x+6;
@@ -57,18 +59,6 @@ void loop(void)
     ucg.setColor(0, 207, 0);
     ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
     
-    int d = x+1;
-    ucg.setColor(0, 207, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(d*2)),200*sin(radians(d*2)));
-    int c = x+2;
-    ucg.setColor(0, 207, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(c*2)),200*sin(radians(c*2)));
-    int b = x+3;
-    ucg.setColor(0, 102, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(b*2)),200*sin(radians(b*2)));
-    int a = x+4;
-    ucg.setColor(0, 102, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(a*2)),200*sin(radians(a*2)));
     int e = x+5;
     ucg.setColor(0, 0, 0);
     ucg.drawLine(Xmax/2, pos, -200*cos(radians(e*2)),200*sin(radians(e*2)));
@@ -103,6 +93,8 @@ void loop(void)
     Serial.println(distance); 
     k = map(x, 10, 80, 165,15); 
     myServo.write(k);
+
+    // Mark red if object found
     if (distance < 10)
     {
       int e = x-5;
@@ -113,18 +105,7 @@ void loop(void)
     
     ucg.setColor(0, 207, 0);
     ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
-    
-    int a = x-1;
-    
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(a*2)),200*sin(radians(a*2)));
-    
-    int b = x-2;
-    ucg.setColor(0, 102, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(b*2)),200*sin(radians(b*2)));
-    
-    int c = x-3;
-    ucg.setColor(0, 102, 0);
-    //ucg.drawLine(Xmax/2, pos, -200*cos(radians(c*2)),200*sin(radians(c*2)));
+
     
     int d = x-4;
     ucg.setColor(0, 0, 0);
