@@ -8,7 +8,8 @@ int Ymax = 128;
 int Xmax = 160;
 int base = 8;
 int pos = base+6;
-int deg=0;
+//int deg=0;
+String deg;
 int x;
 int val =200;
 int j = 2;
@@ -16,7 +17,7 @@ Servo myServo;
 
 long duration;
 int distance;
-int k;
+int servoPos;
 
 
 Ucglib_ST7735_18x128x160_HWSPI ucg(/*cd=*/ 9, /*cs=*/ 10, /*reset=*/ 8);
@@ -46,8 +47,8 @@ void loop(void)
     distance = calculateDistance();
     Serial.println(distance); 
     
-    k = map(x, 80, 10, 15,165); 
-    myServo.write(k);
+    servoPos = map(x, 80, 10, 15,165); 
+    myServo.write(servoPos);
 
     // Mark red if object found
     if (distance < 30)
@@ -66,7 +67,16 @@ void loop(void)
     ucg.setPrintPos(160,0);
     ucg.setPrintDir(2);
     ucg.print("Deg :"); 
-    deg = map (x, 80, 10 , 0, 180); 
+    //deg = map (x, 10, 80 , 0, 180); 
+    if(servoPos < 100) 
+    {
+      deg = "0" + String(servoPos);
+    }
+    else
+    {
+      deg = String(servoPos);
+    }
+    
     ucg.setPrintPos(120,0);
     ucg.setPrintDir(2);
     ucg.print(deg);
@@ -91,8 +101,8 @@ void loop(void)
   {  
     distance = calculateDistance();
     Serial.println(distance); 
-    k = map(x, 10, 80, 165,15); 
-    myServo.write(k);
+    servoPos = map(x, 10, 80, 165,15); 
+    myServo.write(servoPos);
 
     // Mark red if object found
     if (distance < 10)
@@ -114,10 +124,20 @@ void loop(void)
     ucg.setPrintPos(160,0);
     ucg.setPrintDir(2);
     ucg.print("Deg :"); 
-    deg = map (x, 10, 80 , 0, 180); 
+    //deg = map (x, 10, 80 , 0, 180); 
+    if(servoPos < 100) 
+    {
+      deg = "0" + String(servoPos);
+    }
+    else
+    {
+      deg = String(servoPos);
+    }
     ucg.setPrintPos(120,0);
     ucg.setPrintDir(2);
     ucg.print(deg); 
+
+
     ucg.setPrintPos(10,0);
     ucg.print(distance); 
     
