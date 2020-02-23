@@ -156,25 +156,28 @@ void loop(void)
 }
   
 void fix(){
+  // draw home/base circle
   ucg.setColor(255, 0, 0);
   ucg.drawDisc(Xmax/2, base, 5, UCG_DRAW_LOWER_RIGHT);
   ucg.drawDisc(Xmax/2, base, 5, UCG_DRAW_LOWER_LEFT);
-  
-  
-  
+
+  // draw 1.00 line
   ucg.setColor(225, 255, 50);
   ucg.drawCircle(80, base, 115, UCG_DRAW_LOWER_RIGHT);
   ucg.drawCircle(80, base, 115, UCG_DRAW_LOWER_LEFT);  
-  
+
+  // draw 0.50 line
   ucg.drawCircle(80, base, 78, UCG_DRAW_LOWER_RIGHT);
   ucg.drawCircle(80, base, 78, UCG_DRAW_LOWER_LEFT);
-  
+
+  // draw 0.25 line
   ucg.drawCircle(80, base, 40, UCG_DRAW_LOWER_RIGHT);
   ucg.drawCircle(80, base, 40, UCG_DRAW_LOWER_LEFT);
-  
+
+  // draw bottom horizontal line
   ucg.drawLine(0, base, 160,base);
   
-  
+  // blank out screen
   ucg.setColor(0, 0, 0);
   ucg.drawBox(100, 0, 30, 8); 
 }
