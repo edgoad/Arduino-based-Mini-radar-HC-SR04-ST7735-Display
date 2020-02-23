@@ -44,52 +44,53 @@ void loop(void)
   
   for ( x=80; x >= 10; x--)
   {  
-    distance = calculateDistance();
-    Serial.println(distance); 
-    
-    servoPos = map(x, 80, 10, 15,165); 
-    myServo.write(servoPos);
-
-    // Mark red if object found
-    if (distance < 30)
-    {
-      int f = x+6;
-      ucg.setColor(255, 0, 0);
-      ucg.drawLine(Xmax/2, pos, -val*cos(radians(f*2)),val*sin(radians(f*2)));
-    }
-    ucg.setColor(0, 207, 0);
-    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
-    
-    int e = x+5;
-    ucg.setColor(0, 0, 0);
-    ucg.drawLine(Xmax/2, pos, -200*cos(radians(e*2)),200*sin(radians(e*2)));
-    ucg.setColor(255, 0, 0);
-    ucg.setPrintPos(160,0);
-    ucg.setPrintDir(2);
-    ucg.print("Deg :"); 
-    //deg = map (x, 10, 80 , 0, 180); 
-    if(servoPos < 100) 
-    {
-      deg = "0" + String(servoPos);
-    }
-    else
-    {
-      deg = String(servoPos);
-    }
-    
-    ucg.setPrintPos(120,0);
-    ucg.setPrintDir(2);
-    ucg.print(deg);
-    ucg.setPrintPos(10,0);
-    ucg.print(distance); 
-    ucg.setColor(0, 0, 255);
-    ucg.setPrintPos(90,38);
-    ucg.setPrintDir(2);
-    ucg.print("0.25");
-    ucg.setPrintPos(90,70);
-    ucg.print("0.50");
-    ucg.setPrintPos(90,110);
-    ucg.print("1.00");
+    drawLine(x+6, x+5);
+//    distance = calculateDistance();
+//    Serial.println(distance); 
+//    
+//    servoPos = map(x, 80, 10, 15,165); 
+//    myServo.write(servoPos);
+//
+//    // Mark red if object found
+//    if (distance < 30)
+//    {
+//      int f = x+6;
+//      ucg.setColor(255, 0, 0);
+//      ucg.drawLine(Xmax/2, pos, -val*cos(radians(f*2)),val*sin(radians(f*2)));
+//    }
+//    ucg.setColor(0, 207, 0);
+//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
+//    
+//    int e = x+5;
+//    ucg.setColor(0, 0, 0);
+//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(e*2)),200*sin(radians(e*2)));
+//    ucg.setColor(255, 0, 0);
+//    ucg.setPrintPos(160,0);
+//    ucg.setPrintDir(2);
+//    ucg.print("Deg :"); 
+//    //deg = map (x, 10, 80 , 0, 180); 
+//    if(servoPos < 100) 
+//    {
+//      deg = "0" + String(servoPos);
+//    }
+//    else
+//    {
+//      deg = String(servoPos);
+//    }
+//    
+//    ucg.setPrintPos(120,0);
+//    ucg.setPrintDir(2);
+//    ucg.print(deg);
+//    ucg.setPrintPos(10,0);
+//    ucg.print(distance); 
+//    ucg.setColor(0, 0, 255);
+//    ucg.setPrintPos(90,38);
+//    ucg.setPrintDir(2);
+//    ucg.print("0.25");
+//    ucg.setPrintPos(90,70);
+//    ucg.print("0.50");
+//    ucg.setPrintPos(90,110);
+//    ucg.print("1.00");
   }
   
   
@@ -99,61 +100,118 @@ void loop(void)
   
   for ( x=10; x <= 80; x++)
   {  
-    distance = calculateDistance();
-    Serial.println(distance); 
-    servoPos = map(x, 10, 80, 165,15); 
-    myServo.write(servoPos);
-
-    // Mark red if object found
-    if (distance < 10)
-    {
-      int e = x-5;
-      ucg.setColor(255, 0, 0);
-      ucg.drawLine(Xmax/2, pos, -val*cos(radians(e*2)),val*sin(radians(e*2)));
-    }
-    
-    
-    ucg.setColor(0, 207, 0);
-    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
-
-    
-    int d = x-4;
-    ucg.setColor(0, 0, 0);
-    ucg.drawLine(Xmax/2, pos, -200*cos(radians(d*2)),200*sin(radians(d*2)));
-    ucg.setColor(255, 0, 0);
-    ucg.setPrintPos(160,0);
-    ucg.setPrintDir(2);
-    ucg.print("Deg :"); 
-    //deg = map (x, 10, 80 , 0, 180); 
-    if(servoPos < 100) 
-    {
-      deg = "0" + String(servoPos);
-    }
-    else
-    {
-      deg = String(servoPos);
-    }
-    ucg.setPrintPos(120,0);
-    ucg.setPrintDir(2);
-    ucg.print(deg); 
-
-
-    ucg.setPrintPos(10,0);
-    ucg.print(distance); 
-    
-    
-    ucg.setColor(0, 0, 255);
-    ucg.setPrintPos(90,38);
-    ucg.setPrintDir(2);
-    ucg.print("0.25");
-    ucg.setPrintPos(90,70);
-    ucg.print("0.50");
-    ucg.setPrintPos(90,110);
-    ucg.print("1.00");
+    drawLine(x-5, x-4);
+//    distance = calculateDistance();
+//    Serial.println(distance); 
+//    servoPos = map(x, 10, 80, 165,15); 
+//    myServo.write(servoPos);
+//
+//    // Mark red if object found
+//    if (distance < 10)
+//    {
+//      int e = x-5;
+//      ucg.setColor(255, 0, 0);
+//      ucg.drawLine(Xmax/2, pos, -val*cos(radians(e*2)),val*sin(radians(e*2)));
+//    }
+//    
+//    
+//    ucg.setColor(0, 207, 0);
+//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
+//
+//    
+//    int d = x-4;
+//    ucg.setColor(0, 0, 0);
+//    ucg.drawLine(Xmax/2, pos, -200*cos(radians(d*2)),200*sin(radians(d*2)));
+//    ucg.setColor(255, 0, 0);
+//    ucg.setPrintPos(160,0);
+//    ucg.setPrintDir(2);
+//    ucg.print("Deg :"); 
+//    //deg = map (x, 10, 80 , 0, 180); 
+//    if(servoPos < 100) 
+//    {
+//      deg = "0" + String(servoPos);
+//    }
+//    else
+//    {
+//      deg = String(servoPos);
+//    }
+//    ucg.setPrintPos(120,0);
+//    ucg.setPrintDir(2);
+//    ucg.print(deg); 
+//
+//
+//    ucg.setPrintPos(10,0);
+//    ucg.print(distance); 
+//    
+//    
+//    ucg.setColor(0, 0, 255);
+//    ucg.setPrintPos(90,38);
+//    ucg.setPrintDir(2);
+//    ucg.print("0.25");
+//    ucg.setPrintPos(90,70);
+//    ucg.print("0.50");
+//    ucg.setPrintPos(90,110);
+//    ucg.print("1.00");
     
   }
   //ucg.clearScreen();
   
+}
+
+void drawLine(int foundOffset, int emptyOffset){
+  distance = calculateDistance();
+  Serial.println(distance); 
+  
+  servoPos = map(x, 80, 10, 15,165); 
+  myServo.write(servoPos);
+  
+  // Mark red if object found
+  if (distance < 30)
+  {
+    //int f = x+6;
+    ucg.setColor(255, 0, 0);
+    ucg.drawLine(Xmax/2, pos, -val*cos(radians(foundOffset*2)),val*sin(radians(foundOffset*2)));
+  }
+
+  // draw sweep
+  ucg.setColor(0, 207, 0);
+  ucg.drawLine(Xmax/2, pos, -200*cos(radians(x*2)),200*sin(radians(x*2)));
+  
+  // clear sweep
+  ucg.setColor(0, 0, 0);
+  ucg.drawLine(Xmax/2, pos, -200*cos(radians(emptyOffset*2)),200*sin(radians(emptyOffset*2)));
+  ucg.setColor(255, 0, 0);
+
+  // print degrees
+  ucg.setPrintPos(160,0);
+  ucg.setPrintDir(2);
+  ucg.print("Deg :"); 
+  if(servoPos < 100) 
+  {
+    deg = "0" + String(servoPos);
+  }
+  else
+  {
+    deg = String(servoPos);
+  }
+  
+  ucg.setPrintPos(120,0);
+  ucg.setPrintDir(2);
+  ucg.print(deg);
+
+  // print distance
+  ucg.setPrintPos(10,0);
+  ucg.print(distance); 
+
+  // print distance markers
+  ucg.setColor(0, 0, 255);
+  ucg.setPrintPos(90,38);
+  ucg.setPrintDir(2);
+  ucg.print("0.25");
+  ucg.setPrintPos(90,70);
+  ucg.print("0.50");
+  ucg.setPrintPos(90,110);
+  ucg.print("1.00");
 }
   
 void fix(){
