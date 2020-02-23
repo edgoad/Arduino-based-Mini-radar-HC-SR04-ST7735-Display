@@ -10,8 +10,6 @@ int base = 8;
 int pos = base+6;
 String deg;           // servo position in degrees (maybe)
 int x;
-int val = 200;
-//int j = 2;
 int minDistance = 30;    // minimum distance to trigger red
 Servo myServo; 
 
@@ -65,7 +63,7 @@ void drawLine(int foundOffset, int emptyOffset){
   if (distance < minDistance)
   {
     ucg.setColor(255, 0, 0);
-    ucg.drawLine(Xmax/2, pos, -val*cos(radians(foundOffset*2)),val*sin(radians(foundOffset*2)));
+    ucg.drawLine(Xmax/2, pos, -200*cos(radians(foundOffset*2)),200*sin(radians(foundOffset*2)));    // replace val with 200
   }
 
   // draw sweep
@@ -81,6 +79,7 @@ void drawLine(int foundOffset, int emptyOffset){
   ucg.setPrintPos(160,0);
   ucg.setPrintDir(2);
   ucg.print("Deg :"); 
+  servoPos = map(x, 80, 10, 15,165); 
   if(servoPos < 100) 
   {
     deg = "0" + String(servoPos);
